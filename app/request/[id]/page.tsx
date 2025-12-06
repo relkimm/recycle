@@ -25,6 +25,17 @@ export default function RequestDetailPage() {
   const [isLiked, setIsLiked] = useState(false);
   const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
   const [proposalSubmitted, setProposalSubmitted] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const images = request.images || [request.imageUrl];
+  const totalImages = images.length;
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const scrollLeft = e.currentTarget.scrollLeft;
+    const width = e.currentTarget.offsetWidth;
+    const newIndex = Math.round(scrollLeft / width);
+    setCurrentImageIndex(newIndex);
+  };
 
   const handleProposalSubmit = (price: number, message: string) => {
     console.log('Proposal submitted:', { price, message });
@@ -51,17 +62,29 @@ export default function RequestDetailPage() {
         </div>
       </header>
 
-      {/* Image Gallery */}
-      <div className="relative h-[340px] bg-[#f7f8fa]">
-        <Image
-          src={request.imageUrl}
-          alt="Request Image"
-          fill
-          className="object-cover"
-        />
-        <div className="absolute bottom-4 right-4 bg-black/60 text-white text-[12px] px-2.5 py-1 rounded-full font-medium">
-          1/3
+      {/* Image Gallery Carousel */}
+      <div className="relative h-[340px] bg-[#f7f8fa] overflow-hidden">
+        <div
+          className="flex h-full overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+          onScroll={handleScroll}
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {images.map((imageUrl, index) => (
+            <div key={index} className="relative w-full h-full flex-shrink-0 snap-center">
+              <Image
+                src={imageUrl}
+                alt={`Request Image ${index + 1}`}
+                fill
+                className="object-cover"
+              />
+            </div>
+          ))}
         </div>
+        {totalImages > 1 && (
+          <div className="absolute bottom-4 right-4 bg-black/60 text-white text-[12px] px-2.5 py-1 rounded-full font-medium">
+            {currentImageIndex + 1}/{totalImages}
+          </div>
+        )}
       </div>
 
       {/* Content */}
@@ -132,7 +155,7 @@ export default function RequestDetailPage() {
         </div>
 
         {/* Proposals CTA (본인 글인 경우) */}
-        {request.proposalCount > 0 && (
+        {isMyRequest && request.proposalCount > 0 && (
           <>
             <div className="h-2 bg-[#f7f8fa] -mx-5" />
             <div className="py-5">

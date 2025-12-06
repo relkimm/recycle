@@ -8,8 +8,9 @@ import { useState } from 'react';
 
 export default function ChatRoomPage({ params }: { params: { id: string } }) {
   const [message, setMessage] = useState('');
-  const chatRoom = chatRooms.find((room) => room.id === params.id);
-  const messages = chatMessages[params.id] || [];
+  // 채팅방 ID 또는 제안 ID로 찾기 (시뮬레이션용)
+  const chatRoom = chatRooms.find((room) => room.id === params.id) || chatRooms[0];
+  const messages = chatMessages[chatRoom.id] || [];
 
   if (!chatRoom) {
     return (

@@ -12,7 +12,7 @@ import { useToast } from '@/lib/ToastContext';
 const initialProposals = [
   {
     id: '1',
-    userName: '박영희',
+    userName: '최예린',
     userImage: 'https://picsum.photos/seed/user1/100/100',
     price: 12000,
     message: '바로 수거 가능해요!',
@@ -23,7 +23,7 @@ const initialProposals = [
   },
   {
     id: '2',
-    userName: '이민수',
+    userName: '정민준',
     userImage: 'https://picsum.photos/seed/user2/100/100',
     price: 14000,
     message: '30분 내로 갈 수 있어요',
@@ -34,7 +34,7 @@ const initialProposals = [
   },
   {
     id: '3',
-    userName: '정수진',
+    userName: '강소율',
     userImage: 'https://picsum.photos/seed/user3/100/100',
     price: 15000,
     message: '꼼꼼하게 수거해 드릴게요',

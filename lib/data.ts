@@ -9,6 +9,7 @@ export interface Request {
   description: string;
   timeAgo: string;
   imageUrl: string;
+  images?: string[];
   category: Category;
   userName: string;
   userImage: string;
@@ -46,8 +47,13 @@ export const requests: Request[] = [
     description: '플라스틱 페트병, 용기류 많아요. 깨끗하게 씻어서 분리해뒀어요.',
     timeAgo: '30분 전',
     imageUrl: 'https://picsum.photos/seed/recycle1/400/400',
+    images: [
+      'https://picsum.photos/seed/recycle1/400/400',
+      'https://picsum.photos/seed/recycle1-2/400/400',
+      'https://picsum.photos/seed/recycle1-3/400/400',
+    ],
     category: 'plastic',
-    userName: '김철수',
+    userName: '서준혁',
     userImage: 'https://picsum.photos/seed/user1/100/100',
   },
   {
@@ -60,7 +66,7 @@ export const requests: Request[] = [
     timeAgo: '2시간 전',
     imageUrl: 'https://picsum.photos/seed/recycle2/400/400',
     category: 'paper',
-    userName: '이영희',
+    userName: '한지우',
     userImage: 'https://picsum.photos/seed/user2/100/100',
   },
   {
@@ -73,7 +79,7 @@ export const requests: Request[] = [
     timeAgo: '3시간 전',
     imageUrl: 'https://picsum.photos/seed/recycle3/400/400',
     category: 'mixed',
-    userName: '박지민',
+    userName: '윤서아',
     userImage: 'https://picsum.photos/seed/user3/100/100',
   },
   {
@@ -86,7 +92,7 @@ export const requests: Request[] = [
     timeAgo: '5시간 전',
     imageUrl: 'https://picsum.photos/seed/recycle4/400/400',
     category: 'large',
-    userName: '최민수',
+    userName: '김도윤',
     userImage: 'https://picsum.photos/seed/user4/100/100',
   },
   {
@@ -99,7 +105,7 @@ export const requests: Request[] = [
     timeAgo: '어제',
     imageUrl: 'https://picsum.photos/seed/recycle5/400/400',
     category: 'paper',
-    userName: '정수진',
+    userName: '이하은',
     userImage: 'https://picsum.photos/seed/user5/100/100',
   },
   {
@@ -112,7 +118,7 @@ export const requests: Request[] = [
     timeAgo: '2일 전',
     imageUrl: 'https://picsum.photos/seed/recycle6/400/400',
     category: 'can',
-    userName: '강동원',
+    userName: '박시우',
     userImage: 'https://picsum.photos/seed/user6/100/100',
   },
 ];
@@ -154,9 +160,9 @@ export const myProposals: Proposal[] = [
 ];
 
 export const users = [
-  { name: '김철수', location: '역삼동', completedDeals: 12, rating: 4.8 },
-  { name: '박영희', location: '서초동', completedDeals: 28, rating: 4.9 },
-  { name: '이민수', location: '신사동', completedDeals: 15, rating: 4.7 },
+  { name: '서준혁', location: '역삼동', completedDeals: 12, rating: 4.8 },
+  { name: '최예린', location: '서초동', completedDeals: 28, rating: 4.9 },
+  { name: '정민준', location: '신사동', completedDeals: 15, rating: 4.7 },
 ];
 
 export interface ChatRoom {
@@ -190,7 +196,7 @@ export const chatRooms: ChatRoom[] = [
     requestDescription: '이사 후 박스 정리 필요해요. 큰 박스 10개, 작은 박스 20개 정도입니다.',
     requestImageUrl: 'https://picsum.photos/seed/recycle2/400/400',
     otherUser: {
-      name: '이영희',
+      name: '한지우',
       image: 'https://picsum.photos/seed/user2/100/100',
     },
     lastMessage: '네, 내일 오전 10시에 방문하겠습니다!',
@@ -204,7 +210,7 @@ export const chatRooms: ChatRoom[] = [
     requestDescription: '플라스틱, 캔 위주입니다. 이미 분리해뒀어요!',
     requestImageUrl: 'https://picsum.photos/seed/recycle3/400/400',
     otherUser: {
-      name: '박지민',
+      name: '윤서아',
       image: 'https://picsum.photos/seed/user3/100/100',
     },
     lastMessage: '감사합니다~',
@@ -218,7 +224,7 @@ export const chatRooms: ChatRoom[] = [
     requestDescription: '플라스틱 페트병, 용기류 많아요. 깨끗하게 씻어서 분리해뒀어요.',
     requestImageUrl: 'https://picsum.photos/seed/recycle1/400/400',
     otherUser: {
-      name: '김철수',
+      name: '서준혁',
       image: 'https://picsum.photos/seed/user1/100/100',
     },
     lastMessage: '위치가 어디신가요?',
