@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { requests } from '@/lib/data';
 import { useToast } from '@/lib/ToastContext';
 import LevelBadge from '@/components/LevelBadge';
+import PaymentModal from '@/components/ui/PaymentModal';
 
 // 시뮬레이션용 제안 데이터
 const initialProposals = [
@@ -51,10 +52,20 @@ export default function ProposalsPage() {
   const request = requests.find((r) => r.id === id) || requests[0];
 
   const [acceptedProposalId, setAcceptedProposalId] = useState<string | null>(null);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [selectedProposal, setSelectedProposal] = useState<typeof initialProposals[0] | null>(null);
 
-  const handleAccept = (proposalId: string, userName: string) => {
-    setAcceptedProposalId(proposalId);
-    showToast(`${userName}님의 제안을 수락했어요!`);
+  const handleAcceptClick = (proposal: typeof initialProposals[0]) => {
+    setSelectedProposal(proposal);
+    setIsPaymentModalOpen(true);
+  };
+
+  const handlePaymentComplete = () => {
+    if (selectedProposal) {
+      setAcceptedProposalId(selectedProposal.id);
+      setIsPaymentModalOpen(false);
+      showToast(`${selectedProposal.userName}님의 제안이 수락되었어요! 결제가 완료되었습니다.`);
+    }
   };
 
   return (
@@ -177,27 +188,39 @@ export default function ProposalsPage() {
                     마감됨
                   </button>
                 ) : (
-                  // 대기중인 제안
-                  <>
-                    <Link
-                      href={`/chat/${proposal.id}`}
-                      className="flex-1 py-3 border border-[#e5e8eb] text-[#4e5968] text-[14px] font-medium rounded-[10px] pressable text-center"
-                    >
-                      채팅하기
-                    </Link>
-                    <button
-                      onClick={() => handleAccept(proposal.id, proposal.userName)}
-                      className="flex-1 py-3 bg-[#191f28] text-white text-[14px] font-semibold rounded-[10px] pressable"
-                    >
-                      수락하기
-                    </button>
-                  </>
+                  // 대기중인 제안: 수락하기 버튼만
+                  <button
+                    onClick={() => handleAcceptClick(proposal)}
+                    className="flex-1 py-3 bg-[#191f28] text-white text-[14px] font-semibold rounded-[10px] pressable"
+                  >
+                    수락하기
+                  </button>
                 )}
               </div>
             </div>
           );
         })}
       </div>
+
+      {/* Payment Modal */}
+      {selectedProposal && (
+        <PaymentModal
+          isOpen={isPaymentModalOpen}
+          onClose={() => setIsPaymentModalOpen(false)}
+          onPaymentComplete={handlePaymentComplete}
+          proposal={{
+            id: selectedProposal.id,
+            userName: selectedProposal.userName,
+            userImage: selectedProposal.userImage,
+            price: selectedProposal.price,
+          }}
+          request={{
+            description: request.description,
+            imageUrl: request.imageUrl,
+            location: request.location,
+          }}
+        />
+      )}
     </div>
   );
 }
