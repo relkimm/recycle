@@ -238,9 +238,8 @@ export default function MyPage() {
                         />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-[16px]">{categoryLabels[req.category].icon}</span>
-                          <span className="text-[13px] font-medium text-[var(--color-text-secondary)]">
+                        <div className="mb-1">
+                          <span className="inline-block px-2 py-[3px] bg-[var(--color-border-light)] rounded-[4px] text-[11px] text-[var(--color-text-secondary)] font-medium">
                             {categoryLabels[req.category].label}
                           </span>
                         </div>

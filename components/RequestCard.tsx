@@ -27,6 +27,13 @@ export default function RequestCard({ request }: { request: Request }) {
       {/* Content */}
       <div className="flex-1 flex flex-col justify-between min-w-0 py-0.5">
         <div>
+          {/* Category Badge */}
+          <div className="mb-1">
+            <span className="inline-block px-2 py-[3px] bg-[var(--color-border-light)] rounded-[4px] text-[11px] text-[var(--color-text-secondary)] font-medium">
+              {category.label}
+            </span>
+          </div>
+
           {/* Title */}
           <h3 className="text-[15px] text-[var(--color-text-primary)] leading-[1.4] line-clamp-2 mb-1">
             {request.description}
@@ -37,13 +44,6 @@ export default function RequestCard({ request }: { request: Request }) {
             <span>{request.location}</span>
             <span>·</span>
             <span>{request.timeAgo}</span>
-          </div>
-
-          {/* Category Badge */}
-          <div className="mt-1.5">
-            <span className="inline-block px-2 py-[3px] bg-[var(--color-border-light)] rounded-[4px] text-[11px] text-[var(--color-text-secondary)] font-medium">
-              {category.label}
-            </span>
           </div>
         </div>
 
