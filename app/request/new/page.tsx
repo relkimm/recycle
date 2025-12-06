@@ -104,7 +104,7 @@ export default function NewRequestPage() {
           <label className="block text-[13px] font-medium text-[#191f28] mb-3">
             사진 <span className="text-[#8b95a1] font-normal">({images.length}/5)</span>
           </label>
-          <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+          <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 pt-2">
             <button
               onClick={() => fileInputRef.current?.click()}
               className="w-[80px] h-[80px] flex-shrink-0 border-2 border-dashed border-[#e5e8eb] rounded-[10px] flex flex-col items-center justify-center text-[#8b95a1] hover:border-[#b0b8c1] transition-colors"
@@ -122,7 +122,7 @@ export default function NewRequestPage() {
             />
 
             {images.map((src, index) => (
-              <div key={index} className="relative w-[80px] h-[80px] flex-shrink-0">
+              <div key={index} className="relative w-[80px] h-[80px] flex-shrink-0 overflow-visible">
                 <Image
                   src={src}
                   alt={`Upload ${index + 1}`}

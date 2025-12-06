@@ -4,6 +4,7 @@ import { ArrowLeft, MapPin, Check, Navigation } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useUser } from '@/lib/UserContext';
+import Link from 'next/link';
 
 const nearbyLocations = [
   { id: '1', name: '역삼동', distance: '현재 위치' },

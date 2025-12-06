@@ -1,12 +1,11 @@
 'use client';
 
-import { Home, Plus, MessageCircle, User } from 'lucide-react';
+import { Home, Plus, User } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const navItems = [
   { href: '/', icon: Home, label: '홈' },
-  { href: '/chat', icon: MessageCircle, label: '채팅' },
   { href: '/request/new', icon: Plus, label: '등록', isCenter: true },
   { href: '/my', icon: User, label: '마이' },
 ];

@@ -177,9 +177,12 @@ export default function ProposalsPage() {
                 ) : (
                   // 대기중인 제안
                   <>
-                    <button className="flex-1 py-3 border border-[#e5e8eb] text-[#4e5968] text-[14px] font-medium rounded-[10px] pressable">
+                    <Link
+                      href={`/chat/${proposal.id}`}
+                      className="flex-1 py-3 border border-[#e5e8eb] text-[#4e5968] text-[14px] font-medium rounded-[10px] pressable text-center"
+                    >
                       채팅하기
-                    </button>
+                    </Link>
                     <button
                       onClick={() => handleAccept(proposal.id, proposal.userName)}
                       className="flex-1 py-3 bg-[#191f28] text-white text-[14px] font-semibold rounded-[10px] pressable"
