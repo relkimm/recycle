@@ -13,7 +13,7 @@ interface ReportModalProps {
 const reportReasons = [
   '약속 시간에 나타나지 않았어요',
   '연락이 되지 않아요',
-  '일방적으로 거래를 취소했어요',
+  '일방적으로 매칭을 취소했어요',
   '기타',
 ];
 

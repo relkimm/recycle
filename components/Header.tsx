@@ -3,9 +3,11 @@
 import { Bell, ChevronDown, Search } from 'lucide-react';
 import Link from 'next/link';
 import { useUser } from '@/lib/UserContext';
+import { notifications } from '@/lib/data';
 
 export default function Header() {
   const { user } = useUser();
+  const unreadCount = notifications.filter((n) => !n.isRead).length;
 
   return (
     <header className="sticky top-0 z-50 bg-white">
@@ -24,10 +26,15 @@ export default function Header() {
           >
             <Search className="w-[22px] h-[22px] text-[#191f28]" strokeWidth={2} />
           </Link>
-          <button className="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#f7f8fa] transition-colors">
+          <Link
+            href="/notifications"
+            className="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#f7f8fa] transition-colors"
+          >
             <Bell className="w-[22px] h-[22px] text-[#191f28]" strokeWidth={2} />
-            <span className="absolute top-2 right-2 w-[6px] h-[6px] bg-[#f04452] rounded-full" />
-          </button>
+            {unreadCount > 0 && (
+              <span className="absolute top-2 right-2 w-[6px] h-[6px] bg-[#f04452] rounded-full" />
+            )}
+          </Link>
         </div>
       </div>
 

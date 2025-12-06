@@ -18,7 +18,7 @@ export default function RequestCard({ request }: { request: Request }) {
         {request.status !== 'recruiting' && (
           <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
             <span className="text-white text-[13px] font-medium">
-              {request.status === 'matched' ? '매칭완료' : '거래완료'}
+              {request.status === 'matched' ? '매칭완료' : '수거 완료'}
             </span>
           </div>
         )}

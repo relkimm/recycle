@@ -41,7 +41,7 @@ export default function TermsPage() {
             <h2 className="text-[15px] font-semibold text-[#191f28] mb-3">제3조 (서비스 이용)</h2>
             <p className="text-[14px] text-[#4e5968] leading-[1.7]">
               1. 이용자는 서비스를 통해 분리수거 요청을 등록하거나 제안할 수 있습니다.<br />
-              2. 거래 성사 후 노쇼(약속 불이행) 시 서비스 이용에 제한이 있을 수 있습니다.<br />
+              2. 매칭 성사 후 노쇼(약속 불이행) 시 서비스 이용에 제한이 있을 수 있습니다.<br />
               3. 허위 정보 등록 시 서비스 이용이 제한됩니다.
             </p>
           </section>

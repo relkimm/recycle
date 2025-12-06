@@ -34,8 +34,10 @@ export default function NewRequestPage() {
     maxPrice: number;
     category: string;
     description: string;
+    detailedDescription: string;
   } | null>(null);
   const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
   const [pickupTime, setPickupTime] = useState('today');
   const [location, setLocation] = useState(user.location);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -64,16 +66,41 @@ export default function NewRequestPage() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const recommendations = [
-      { minPrice: 12000, maxPrice: 18000, category: 'plastic', description: '플라스틱 용기류가 많이 보여요' },
-      { minPrice: 15000, maxPrice: 25000, category: 'paper', description: '박스와 종이류가 있네요' },
-      { minPrice: 20000, maxPrice: 30000, category: 'mixed', description: '여러 종류가 섞여있어요' },
-      { minPrice: 25000, maxPrice: 40000, category: 'large', description: '대형 폐기물이 포함되어 있어요' },
+      {
+        minPrice: 12000,
+        maxPrice: 18000,
+        category: 'plastic',
+        description: '플라스틱 용기류가 많이 보여요',
+        detailedDescription: '플라스틱 용기 약 15개, 페트병 10개 정도 있습니다. 깨끗하게 세척되어 있고 라벨도 제거된 상태예요.'
+      },
+      {
+        minPrice: 15000,
+        maxPrice: 25000,
+        category: 'paper',
+        description: '박스와 종이류가 있네요',
+        detailedDescription: '택배 박스 5~7개 정도와 종이류가 있어요. 박스는 접어서 묶어두었습니다.'
+      },
+      {
+        minPrice: 20000,
+        maxPrice: 30000,
+        category: 'mixed',
+        description: '여러 종류가 섞여있어요',
+        detailedDescription: '플라스틱, 종이, 캔 등 여러 종류가 섞여 있습니다. 대략 20~25개 정도 되는 것 같아요.'
+      },
+      {
+        minPrice: 25000,
+        maxPrice: 40000,
+        category: 'large',
+        description: '대형 폐기물이 포함되어 있어요',
+        detailedDescription: '의자 1개, 선반 1개 등 대형 폐기물이 있어요. 크기가 있어서 차량이 필요할 것 같습니다.'
+      },
     ];
     const recommendation = recommendations[Math.floor(Math.random() * recommendations.length)];
 
     setAiRecommendation(recommendation);
     setSelectedCategory(recommendation.category);
     setPrice(recommendation.minPrice.toLocaleString());
+    setDescription(recommendation.detailedDescription);
     setIsAnalyzing(false);
   };
 
@@ -81,6 +108,9 @@ export default function NewRequestPage() {
     setImages(images.filter((_, i) => i !== index));
     if (images.length === 1) {
       setAiRecommendation(null);
+      setDescription('');
+      setPrice('');
+      setSelectedCategory('');
     }
   };
 
@@ -202,13 +232,28 @@ export default function NewRequestPage() {
 
         {/* Description */}
         <section>
-          <label className="block text-[13px] font-medium text-[#191f28] mb-3">
-            상세 설명
-          </label>
+          <div className="flex items-center justify-between mb-3">
+            <label className="block text-[13px] font-medium text-[#191f28]">
+              상세 설명
+            </label>
+            {description && aiRecommendation && (
+              <div className="flex items-center gap-1 text-[11px] text-[#8b95a1]">
+                <Sparkles className="w-3.5 h-3.5" strokeWidth={2} />
+                <span>AI가 작성했어요</span>
+              </div>
+            )}
+          </div>
           <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             placeholder="수거자에게 전달할 내용을 적어주세요&#10;예) 플라스틱 10개, 박스 5개 정도 있어요"
             className="w-full border border-[#e5e8eb] rounded-[10px] p-4 text-[15px] text-[#191f28] placeholder-[#b0b8c1] focus:border-[#191f28] focus:ring-1 focus:ring-[#191f28] h-[120px] resize-none transition-all"
           />
+          {description && aiRecommendation && (
+            <p className="text-[12px] text-[#8b95a1] mt-2">
+              자유롭게 수정해보세요!
+            </p>
+          )}
         </section>
 
         {/* Price */}

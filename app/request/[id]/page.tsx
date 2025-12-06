@@ -45,6 +45,39 @@ export default function RequestDetailPage() {
     // 실제로는 API 호출
   };
 
+  const handleShare = async () => {
+    const shareData = {
+      title: request.description,
+      text: `${request.description}\n${request.price.toLocaleString()}원 · ${request.location}`,
+      url: window.location.href,
+    };
+
+    try {
+      // Web Share API 지원 여부 확인
+      if (navigator.share) {
+        await navigator.share(shareData);
+        showToast('공유되었어요!');
+      } else {
+        // Web Share API 미지원 시 클립보드에 복사
+        await navigator.clipboard.writeText(window.location.href);
+        showToast('링크가 복사되었어요!');
+      }
+    } catch (error) {
+      // 사용자가 공유를 취소한 경우 등
+      if ((error as Error).name !== 'AbortError') {
+        console.error('Share failed:', error);
+        // 클립보드 복사로 fallback
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          showToast('링크가 복사되었어요!');
+        } catch (clipboardError) {
+          console.error('Clipboard copy failed:', clipboardError);
+          showToast('공유에 실패했어요');
+        }
+      }
+    }
+  };
+
   return (
     <>
       <div className="flex-1 bg-white overflow-y-auto">
@@ -57,7 +90,10 @@ export default function RequestDetailPage() {
           <ArrowLeft className="w-5 h-5 text-[#191f28]" strokeWidth={2} />
         </Link>
         <div className="flex gap-2">
-          <button className="w-10 h-10 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-[0_2px_8px_rgba(0,0,0,0.12)]">
+          <button
+            onClick={handleShare}
+            className="w-10 h-10 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-[0_2px_8px_rgba(0,0,0,0.12)] pressable"
+          >
             <Share className="w-5 h-5 text-[#191f28]" strokeWidth={2} />
           </button>
         </div>
@@ -95,7 +131,10 @@ export default function RequestDetailPage() {
       {/* Content */}
       <div className="px-5 pt-5 pb-4">
         {/* User Profile */}
-        <div className="flex items-center gap-3 pb-4">
+        <Link
+          href={`/user/${request.id}`}
+          className="flex items-center gap-3 pb-4 pressable -mx-2 px-2 py-2 rounded-[12px] hover:bg-[#f7f8fa] transition-colors"
+        >
           <div className="w-12 h-12 rounded-full overflow-hidden relative bg-[#f7f8fa]">
             <Image
               src={request.userImage}
@@ -109,10 +148,11 @@ export default function RequestDetailPage() {
               {request.userName}
             </div>
             <div className="text-[13px] text-[#8b95a1]">
-              {request.location} · 거래 12회
+              {request.location} · 매칭 12회
             </div>
           </div>
-        </div>
+          <span className="text-[13px] text-[#8b95a1]">프로필 보기 →</span>
+        </Link>
 
         {/* Divider */}
         <div className="h-px bg-[#f2f4f6] -mx-5" />

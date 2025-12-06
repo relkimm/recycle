@@ -1,9 +1,9 @@
 'use client';
 
 import BottomNav from '@/components/BottomNav';
-import { Settings, Heart, Clock } from 'lucide-react';
+import { Settings, Heart, Clock, Bell } from 'lucide-react';
 import Image from 'next/image';
-import { requests, myProposals } from '@/lib/data';
+import { requests, myProposals, notifications } from '@/lib/data';
 import RequestCard from '@/components/RequestCard';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -13,7 +13,9 @@ export default function MyPage() {
   const { user } = useUser();
   const [activeTab, setActiveTab] = useState<'requests' | 'proposals'>('requests');
 
-  const myRequests = requests.slice(0, 2);
+  // 내가 작성한 요청만 필터링
+  const myRequests = requests.filter((req) => req.authorId === 'me');
+  const unreadCount = notifications.filter((n) => !n.isRead).length;
 
   const statusLabels = {
     pending: '대기중',
@@ -34,9 +36,20 @@ export default function MyPage() {
         <header className="sticky top-0 z-50 bg-white">
         <div className="px-5 py-3 flex items-center justify-between">
           <h1 className="text-[18px] font-bold text-[#191f28]">마이</h1>
-          <Link href="/my/settings" className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#f7f8fa]">
-            <Settings className="w-[22px] h-[22px] text-[#191f28]" strokeWidth={2} />
-          </Link>
+          <div className="flex items-center">
+            <Link
+              href="/notifications"
+              className="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#f7f8fa] transition-colors"
+            >
+              <Bell className="w-[22px] h-[22px] text-[#191f28]" strokeWidth={2} />
+              {unreadCount > 0 && (
+                <span className="absolute top-2 right-2 w-[6px] h-[6px] bg-[#f04452] rounded-full" />
+              )}
+            </Link>
+            <Link href="/my/settings" className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#f7f8fa]">
+              <Settings className="w-[22px] h-[22px] text-[#191f28]" strokeWidth={2} />
+            </Link>
+          </div>
         </div>
         <div className="h-px bg-[#f2f4f6]" />
       </header>
@@ -68,7 +81,7 @@ export default function MyPage() {
         <div className="flex mt-5 py-4 bg-[#f7f8fa] rounded-[12px]">
           <div className="flex-1 text-center border-r border-[#e5e8eb]">
             <div className="text-[18px] font-bold text-[#191f28]">{user.transactionCount}</div>
-            <div className="text-[12px] text-[#8b95a1] mt-0.5">거래완료</div>
+            <div className="text-[12px] text-[#8b95a1] mt-0.5">수거 완료</div>
           </div>
           <div className="flex-1 text-center border-r border-[#e5e8eb]">
             <div className="text-[18px] font-bold text-[#191f28]">28</div>

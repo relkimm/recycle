@@ -36,11 +36,14 @@ export default function ChatRoomPage({ params }: { params: { id: string } }) {
           <div className="flex items-center gap-3 flex-1">
             <Link
               href="/chat"
-              className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#f7f8fa]"
+              className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#f7f8fa] flex-shrink-0"
             >
               <ArrowLeft className="w-5 h-5 text-[#191f28]" strokeWidth={2} />
             </Link>
-            <div className="flex items-center gap-3 flex-1">
+            <Link
+              href={`/user/${chatRoom.id}`}
+              className="flex items-center gap-3 flex-1 min-w-0 -mx-2 px-2 py-2 rounded-[10px] hover:bg-[#f7f8fa] transition-colors pressable"
+            >
               <div className="w-[36px] h-[36px] rounded-full overflow-hidden bg-[#f7f8fa] flex-shrink-0">
                 <Image
                   src={chatRoom.otherUser.image}
@@ -50,10 +53,10 @@ export default function ChatRoomPage({ params }: { params: { id: string } }) {
                   className="object-cover"
                 />
               </div>
-              <h1 className="text-[17px] font-bold text-[#191f28]">
+              <h1 className="text-[17px] font-bold text-[#191f28] truncate">
                 {chatRoom.otherUser.name}
               </h1>
-            </div>
+            </Link>
           </div>
           <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#f7f8fa]">
             <MoreVertical className="w-5 h-5 text-[#191f28]" strokeWidth={2} />

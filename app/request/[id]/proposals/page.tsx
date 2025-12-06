@@ -114,8 +114,11 @@ export default function ProposalsPage() {
               key={proposal.id}
               className={`py-5 border-b border-[#f2f4f6] last:border-b-0 ${isRejected ? 'opacity-50' : ''}`}
             >
-              <div className="flex items-start gap-3 mb-3">
-                <div className="w-11 h-11 rounded-full overflow-hidden relative bg-[#f7f8fa]">
+              <Link
+                href={`/user/${proposal.id}`}
+                className="flex items-start gap-3 mb-3 -mx-2 px-2 py-2 rounded-[10px] hover:bg-[#f7f8fa] transition-colors pressable"
+              >
+                <div className="w-11 h-11 rounded-full overflow-hidden relative bg-[#f7f8fa] flex-shrink-0">
                   <Image
                     src={proposal.userImage}
                     alt={proposal.userName}
@@ -123,8 +126,8 @@ export default function ProposalsPage() {
                     className="object-cover"
                   />
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-0.5">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-0.5 flex-wrap">
                     <span className="text-[15px] font-semibold text-[#191f28]">
                       {proposal.userName}
                     </span>
@@ -140,10 +143,10 @@ export default function ProposalsPage() {
                     )}
                   </div>
                   <div className="text-[12px] text-[#8b95a1]">
-                    거래 {proposal.transactionCount}회 · 노쇼 {proposal.noShowCount}회 · {proposal.createdAt}
+                    매칭 {proposal.transactionCount}회 · 노쇼 {proposal.noShowCount}회 · {proposal.createdAt}
                   </div>
                 </div>
-              </div>
+              </Link>
 
               <div className="mb-4">
                 <div className="text-[20px] font-bold text-[#191f28] mb-1">
