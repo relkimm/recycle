@@ -8,6 +8,8 @@ import RequestCard from '@/components/RequestCard';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useUser } from '@/lib/UserContext';
+import LevelProgress from '@/components/LevelProgress';
+import LevelBadge from '@/components/LevelBadge';
 
 export default function MyPage() {
   const { user } = useUser();
@@ -56,7 +58,7 @@ export default function MyPage() {
 
       {/* Profile Section */}
       <div className="px-5 py-5">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 mb-5">
           <div className="w-[60px] h-[60px] rounded-full overflow-hidden relative bg-[#f7f8fa]">
             <Image
               src={user.profileImage}
@@ -66,7 +68,10 @@ export default function MyPage() {
             />
           </div>
           <div className="flex-1">
-            <h2 className="text-[17px] font-bold text-[#191f28]">{user.name}</h2>
+            <div className="flex items-center gap-2 mb-1">
+              <h2 className="text-[17px] font-bold text-[#191f28]">{user.name}</h2>
+              <LevelBadge matchCount={user.transactionCount} size="sm" />
+            </div>
             <p className="text-[13px] text-[#8b95a1]">{user.location.name}</p>
           </div>
           <Link
@@ -77,21 +82,8 @@ export default function MyPage() {
           </Link>
         </div>
 
-        {/* Stats */}
-        <div className="flex mt-5 py-4 bg-[#f7f8fa] rounded-[12px]">
-          <div className="flex-1 text-center border-r border-[#e5e8eb]">
-            <div className="text-[18px] font-bold text-[#191f28]">{user.transactionCount}</div>
-            <div className="text-[12px] text-[#8b95a1] mt-0.5">수거 완료</div>
-          </div>
-          <div className="flex-1 text-center border-r border-[#e5e8eb]">
-            <div className="text-[18px] font-bold text-[#191f28]">28</div>
-            <div className="text-[12px] text-[#8b95a1] mt-0.5">받은제안</div>
-          </div>
-          <div className="flex-1 text-center">
-            <div className="text-[18px] font-bold text-[#191f28]">{user.noShowCount}</div>
-            <div className="text-[12px] text-[#8b95a1] mt-0.5">노쇼</div>
-          </div>
-        </div>
+        {/* Level Progress */}
+        <LevelProgress matchCount={user.transactionCount} isMyProfile={true} />
       </div>
 
       {/* Quick Menu */}
@@ -157,7 +149,8 @@ export default function MyPage() {
             </div>
           ) : (
             <div className="py-20 text-center">
-              <p className="text-[14px] text-[#8b95a1]">등록한 요청이 없어요</p>
+              <p className="text-[15px] text-[#4e5968] mb-1">아직 등록한 요청이 없어요</p>
+              <p className="text-[13px] text-[#8b95a1]">분리수거가 필요한 물건이 있나요?</p>
             </div>
           )
         ) : myProposals.length > 0 ? (
@@ -201,7 +194,8 @@ export default function MyPage() {
           </div>
         ) : (
           <div className="py-20 text-center">
-            <p className="text-[14px] text-[#8b95a1]">보낸 제안이 없어요</p>
+            <p className="text-[15px] text-[#4e5968] mb-1">아직 보낸 제안이 없어요</p>
+            <p className="text-[13px] text-[#8b95a1]">동네 이웃에게 도움을 줘보세요</p>
           </div>
         )}
       </div>

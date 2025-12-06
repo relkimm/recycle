@@ -151,7 +151,7 @@ export default function RequestDetailPage() {
               {request.location} · 매칭 12회
             </div>
           </div>
-          <span className="text-[13px] text-[#8b95a1]">프로필 보기 →</span>
+          <span className="text-[13px] text-[#8b95a1]">프로필 보기</span>
         </Link>
 
         {/* Divider */}
@@ -198,29 +198,6 @@ export default function RequestDetailPage() {
             깨끗하게 씻어서 정리해뒀어요.
           </p>
         </div>
-
-        {/* Proposals CTA (본인 글인 경우) */}
-        {isMyRequest && request.proposalCount > 0 && (
-          <>
-            <div className="h-2 bg-[#f7f8fa] -mx-5" />
-            <div className="py-5">
-              <Link
-                href={`/request/${id}/proposals`}
-                className="flex items-center justify-between p-4 bg-[#f7f8fa] rounded-[14px] pressable"
-              >
-                <div>
-                  <p className="text-[15px] font-semibold text-[#191f28] mb-0.5">
-                    {request.proposalCount}개의 제안이 도착했어요
-                  </p>
-                  <p className="text-[13px] text-[#8b95a1]">
-                    최저가 12,000원부터
-                  </p>
-                </div>
-                <span className="text-[14px] font-medium text-[#191f28]">확인하기 →</span>
-              </Link>
-            </div>
-          </>
-        )}
       </div>
       </div>
 

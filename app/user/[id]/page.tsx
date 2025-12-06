@@ -59,40 +59,23 @@ export default function UserProfilePage() {
                 className="object-cover"
               />
             </div>
-            <h2 className="text-[18px] font-bold text-[#191f28] mb-2">
+            <h2 className="text-[18px] font-bold text-[#191f28] mb-1">
               {user.name}
             </h2>
-            <div className="flex items-center gap-1 text-[13px] text-[#8b95a1] mb-3">
+            <div className="flex items-center gap-1 text-[13px] text-[#8b95a1]">
               <MapPin className="w-3.5 h-3.5" strokeWidth={2} />
               <span>{user.location}</span>
             </div>
-            <LevelBadge matchCount={user.transactionCount} size="lg" />
           </div>
 
           {/* Level Progress */}
-          <div className="mb-6">
+          <div className="mb-4">
             <LevelProgress matchCount={user.transactionCount} />
-          </div>
-
-          {/* Stats */}
-          <div className="flex py-4 bg-white border border-[#e5e8eb] rounded-[12px] mb-6">
-            <div className="flex-1 text-center border-r border-[#e5e8eb]">
-              <div className="text-[18px] font-bold text-[#191f28]">
-                {user.receivedProposalCount}
-              </div>
-              <div className="text-[12px] text-[#8b95a1] mt-0.5">받은제안</div>
-            </div>
-            <div className="flex-1 text-center">
-              <div className="text-[18px] font-bold text-[#191f28]">
-                {user.noShowCount}
-              </div>
-              <div className="text-[12px] text-[#8b95a1] mt-0.5">노쇼</div>
-            </div>
           </div>
 
           {/* Special Badges */}
           {user.noShowCount === 0 && user.transactionCount >= 10 && (
-            <div className="mb-6 p-4 bg-[#f7f8fa] border border-[#e5e8eb] rounded-[12px]">
+            <div className="p-4 bg-white border border-[#e5e8eb] rounded-[16px] shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-[15px] font-semibold text-[#191f28]">
                   ✅ 노쇼 제로

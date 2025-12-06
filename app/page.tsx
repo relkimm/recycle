@@ -32,7 +32,7 @@ export default function Home() {
                 아직 동네에 요청이 없어요
               </h3>
               <p className="text-[14px] text-[#8b95a1] mb-6">
-                첫 번째 분리수거 요청을 등록해보세요
+                첫 번째로 분리수거 요청을 등록해볼까요?
               </p>
               <Link
                 href="/request/new"

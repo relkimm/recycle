@@ -7,6 +7,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { requests } from '@/lib/data';
 import { useToast } from '@/lib/ToastContext';
+import LevelBadge from '@/components/LevelBadge';
 
 // 시뮬레이션용 제안 데이터
 const initialProposals = [
@@ -17,7 +18,6 @@ const initialProposals = [
     price: 12000,
     message: '바로 수거 가능해요!',
     transactionCount: 28,
-    noShowCount: 0,
     createdAt: '5분 전',
     isLowest: true,
   },
@@ -28,7 +28,6 @@ const initialProposals = [
     price: 14000,
     message: '30분 내로 갈 수 있어요',
     transactionCount: 15,
-    noShowCount: 0,
     createdAt: '12분 전',
     isLowest: false,
   },
@@ -39,7 +38,6 @@ const initialProposals = [
     price: 15000,
     message: '꼼꼼하게 수거해 드릴게요',
     transactionCount: 42,
-    noShowCount: 1,
     createdAt: '30분 전',
     isLowest: false,
   },
@@ -131,6 +129,7 @@ export default function ProposalsPage() {
                     <span className="text-[15px] font-semibold text-[#191f28]">
                       {proposal.userName}
                     </span>
+                    <LevelBadge matchCount={proposal.transactionCount} size="sm" />
                     {isAccepted && (
                       <span className="bg-[#191f28] text-white text-[10px] px-1.5 py-0.5 rounded font-medium">
                         수락됨
@@ -143,7 +142,7 @@ export default function ProposalsPage() {
                     )}
                   </div>
                   <div className="text-[12px] text-[#8b95a1]">
-                    매칭 {proposal.transactionCount}회 · 노쇼 {proposal.noShowCount}회 · {proposal.createdAt}
+                    매칭 {proposal.transactionCount}회 · {proposal.createdAt}
                   </div>
                 </div>
               </Link>

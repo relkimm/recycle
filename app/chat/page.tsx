@@ -1,6 +1,6 @@
 'use client';
 
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { chatRooms } from '@/lib/data';
@@ -10,8 +10,16 @@ export default function ChatPage() {
     <div className="flex-1 bg-white overflow-y-auto">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white">
-        <div className="px-5 py-4">
-          <h1 className="text-[20px] font-bold text-[#191f28]">채팅</h1>
+        <div className="px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Link
+              href="/"
+              className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#f7f8fa]"
+            >
+              <ArrowLeft className="w-5 h-5 text-[#191f28]" strokeWidth={2} />
+            </Link>
+            <h1 className="text-[17px] font-bold text-[#191f28]">채팅</h1>
+          </div>
         </div>
         <div className="h-px bg-[#f2f4f6]" />
       </header>
@@ -77,11 +85,11 @@ export default function ChatPage() {
       ) : (
         <div className="py-20 text-center">
           <MessageCircle className="w-12 h-12 text-[#e5e8eb] mx-auto mb-4" strokeWidth={1.5} />
-          <p className="text-[15px] text-[#8b95a1] mb-1">아직 채팅이 없어요</p>
-          <p className="text-[13px] text-[#b0b8c1]">요청에 제안을 보내보세요!</p>
+          <p className="text-[15px] text-[#4e5968] mb-1">아직 채팅이 없어요</p>
+          <p className="text-[13px] text-[#8b95a1] mb-5">요청에 제안을 보내면 채팅을 시작할 수 있어요</p>
           <Link
             href="/"
-            className="inline-block mt-4 px-5 py-2.5 bg-[#191f28] text-white text-[14px] font-medium rounded-[8px] pressable"
+            className="inline-block px-5 py-2.5 bg-[#191f28] text-white text-[14px] font-medium rounded-[8px] pressable"
           >
             둘러보기
           </Link>

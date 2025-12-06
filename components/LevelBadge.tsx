@@ -3,10 +3,9 @@ import { getUserLevel } from '@/lib/level';
 interface LevelBadgeProps {
   matchCount: number;
   size?: 'sm' | 'md' | 'lg';
-  showLabel?: boolean;
 }
 
-export default function LevelBadge({ matchCount, size = 'md', showLabel = true }: LevelBadgeProps) {
+export default function LevelBadge({ matchCount, size = 'md' }: LevelBadgeProps) {
   const level = getUserLevel(matchCount);
 
   const sizeClasses = {
@@ -17,10 +16,9 @@ export default function LevelBadge({ matchCount, size = 'md', showLabel = true }
 
   return (
     <span
-      className={`inline-flex items-center gap-1 bg-[#f7f8fa] text-[#191f28] rounded-[6px] font-semibold ${sizeClasses[size]}`}
+      className={`inline-flex items-center bg-[#f7f8fa] text-[#191f28] rounded-[6px] font-semibold ${sizeClasses[size]}`}
     >
-      <span>{level.icon}</span>
-      {showLabel && <span>Lv.{level.level} {level.name}</span>}
+      Lv.{level.level}
     </span>
   );
 }

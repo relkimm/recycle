@@ -2,20 +2,17 @@
 
 export interface Level {
   level: number;
-  name: string;
-  icon: string;
   minMatches: number;
   maxMatches: number;
-  color: string;
 }
 
 export const levels: Level[] = [
-  { level: 1, name: '새싹', icon: '🌱', minMatches: 0, maxMatches: 4, color: '#10b981' },
-  { level: 2, name: '일반', icon: '♻️', minMatches: 5, maxMatches: 9, color: '#06b6d4' },
-  { level: 3, name: '열정', icon: '⚡', minMatches: 10, maxMatches: 19, color: '#f59e0b' },
-  { level: 4, name: '베테랑', icon: '⭐', minMatches: 20, maxMatches: 34, color: '#8b5cf6' },
-  { level: 5, name: '마스터', icon: '💎', minMatches: 35, maxMatches: 49, color: '#ec4899' },
-  { level: 6, name: '전설', icon: '👑', minMatches: 50, maxMatches: Infinity, color: '#f59e0b' },
+  { level: 1, minMatches: 0, maxMatches: 4 },
+  { level: 2, minMatches: 5, maxMatches: 9 },
+  { level: 3, minMatches: 10, maxMatches: 19 },
+  { level: 4, minMatches: 20, maxMatches: 34 },
+  { level: 5, minMatches: 35, maxMatches: 49 },
+  { level: 6, minMatches: 50, maxMatches: Infinity },
 ];
 
 export function getUserLevel(matchCount: number): Level {

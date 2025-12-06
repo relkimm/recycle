@@ -123,7 +123,7 @@ export default function NewRequestPage() {
           <Link href="/" className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#f7f8fa]">
             <X className="w-5 h-5 text-[#191f28]" strokeWidth={2} />
           </Link>
-          <h1 className="text-[17px] font-bold text-[#191f28]">수거 요청하기</h1>
+          <h1 className="text-[17px] font-bold text-[#191f28]">요청 등록하기</h1>
           <div className="w-10" />
         </div>
         <div className="h-px bg-[#f2f4f6]" />
