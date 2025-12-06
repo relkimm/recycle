@@ -8,7 +8,7 @@ export default function RequestCard({ request }: { request: Request }) {
   return (
     <article className="flex gap-4 py-4 pressable cursor-pointer">
       {/* Image */}
-      <div className="relative w-[108px] h-[108px] flex-shrink-0 rounded-[12px] overflow-hidden bg-[#f7f8fa]">
+      <div className="relative w-[108px] h-[108px] flex-shrink-0 rounded-[12px] overflow-hidden bg-[var(--color-bg-secondary)]">
         <Image
           src={request.imageUrl}
           alt="Request"
@@ -28,12 +28,12 @@ export default function RequestCard({ request }: { request: Request }) {
       <div className="flex-1 flex flex-col justify-between min-w-0 py-0.5">
         <div>
           {/* Title */}
-          <h3 className="text-[15px] text-[#191f28] leading-[1.4] line-clamp-2 mb-1">
+          <h3 className="text-[15px] text-[var(--color-text-primary)] leading-[1.4] line-clamp-2 mb-1">
             {request.description}
           </h3>
 
           {/* Meta */}
-          <div className="flex items-center gap-1 text-[13px] text-[#8b95a1]">
+          <div className="flex items-center gap-1 text-[13px] text-[var(--color-text-tertiary)]">
             <span>{request.location}</span>
             <span>·</span>
             <span>{request.timeAgo}</span>
@@ -41,7 +41,7 @@ export default function RequestCard({ request }: { request: Request }) {
 
           {/* Category Badge */}
           <div className="mt-1.5">
-            <span className="inline-block px-2 py-[3px] bg-[#f2f4f6] rounded-[4px] text-[11px] text-[#4e5968] font-medium">
+            <span className="inline-block px-2 py-[3px] bg-[var(--color-border-light)] rounded-[4px] text-[11px] text-[var(--color-text-secondary)] font-medium">
               {category.label}
             </span>
           </div>
@@ -49,18 +49,18 @@ export default function RequestCard({ request }: { request: Request }) {
 
         {/* Bottom */}
         <div className="flex justify-between items-end mt-2">
-          <span className="text-[17px] font-bold text-[#191f28]">
+          <span className="text-[17px] font-bold text-[var(--color-text-primary)]">
             {request.price.toLocaleString()}원
           </span>
 
           <div className="flex items-center gap-3">
             {request.proposalCount > 0 && (
-              <div className="flex items-center gap-1 text-[#8b95a1]">
+              <div className="flex items-center gap-1 text-[var(--color-text-tertiary)]">
                 <MessageCircle className="w-[15px] h-[15px]" strokeWidth={2} />
                 <span className="text-[12px]">{request.proposalCount}</span>
               </div>
             )}
-            <div className="flex items-center gap-1 text-[#8b95a1]">
+            <div className="flex items-center gap-1 text-[var(--color-text-tertiary)]">
               <Heart className="w-[15px] h-[15px]" strokeWidth={2} />
               <span className="text-[12px]">{Math.floor(Math.random() * 10) + 1}</span>
             </div>

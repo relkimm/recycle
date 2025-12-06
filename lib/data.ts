@@ -5,7 +5,7 @@ export interface Request {
   location: string;
   price: number;
   proposalCount: number;
-  status: 'recruiting' | 'matched' | 'completed';
+  status: 'recruiting' | 'matched' | 'in_progress' | 'completed_waiting' | 'completed';
   description: string;
   timeAgo: string;
   imageUrl: string;
@@ -14,6 +14,11 @@ export interface Request {
   userName: string;
   userImage: string;
   authorId: string; // 작성자 ID ('me'이면 현재 사용자가 작성한 글)
+  collectorId?: string; // 매칭된 수거자 ID
+  collectorName?: string; // 매칭된 수거자 이름
+  collectorImage?: string; // 매칭된 수거자 프로필 이미지
+  completionImage?: string; // 수거 완료 인증 사진
+  completionTime?: string; // 수거 완료 시간
 }
 
 export interface Proposal {
@@ -28,14 +33,14 @@ export interface Proposal {
   createdAt: string;
 }
 
-export const categoryLabels: Record<Category, { label: string; icon: string }> = {
-  plastic: { label: '플라스틱', icon: '🧴' },
-  paper: { label: '종이/박스', icon: '📦' },
-  can: { label: '캔/고철', icon: '🥫' },
-  glass: { label: '유리', icon: '🍾' },
-  vinyl: { label: '비닐', icon: '🛍️' },
-  large: { label: '대형폐기물', icon: '🛋️' },
-  mixed: { label: '혼합', icon: '♻️' },
+export const categoryLabels: Record<Category, { label: string }> = {
+  plastic: { label: '플라스틱' },
+  paper: { label: '종이/박스' },
+  can: { label: '캔/고철' },
+  glass: { label: '유리' },
+  vinyl: { label: '비닐' },
+  large: { label: '대형폐기물' },
+  mixed: { label: '혼합' },
 };
 
 export const requests: Request[] = [
@@ -59,13 +64,13 @@ export const requests: Request[] = [
     userImage: 'https://picsum.photos/seed/me/200/200',
     authorId: 'me',
   },
-  // 내가 작성한 글 (매칭완료)
+  // 내가 작성한 글 (수거 완료 대기중 - 수거자가 완료 인증 했지만 내가 확인 안함)
   {
     id: '2',
     location: '역삼동',
     price: 25000,
     proposalCount: 7,
-    status: 'matched',
+    status: 'completed_waiting',
     description: '이사 후 박스 정리 필요해요. 큰 박스 10개, 작은 박스 20개 정도입니다.',
     timeAgo: '1시간 전',
     imageUrl: 'https://picsum.photos/seed/recycle2/400/400',
@@ -73,6 +78,11 @@ export const requests: Request[] = [
     userName: '김철수',
     userImage: 'https://picsum.photos/seed/me/200/200',
     authorId: 'me',
+    collectorId: 'user2',
+    collectorName: '한지우',
+    collectorImage: 'https://picsum.photos/seed/user2/100/100',
+    completionImage: 'https://picsum.photos/seed/completion2/400/400',
+    completionTime: '30분 전',
   },
   // 내가 작성한 글 (수거완료)
   {
@@ -224,13 +234,13 @@ export const requests: Request[] = [
     userImage: 'https://picsum.photos/seed/user10/100/100',
     authorId: 'user10',
   },
-  // 내가 제안한 글 (매칭완료 - 내가 선택됨)
+  // 내가 제안한 글 (수거 진행중 - 내가 수거자로 선택됨)
   {
     id: '13',
     location: '삼성역',
     price: 28000,
     proposalCount: 9,
-    status: 'matched',
+    status: 'in_progress',
     description: '이사 준비 중이에요. 종이박스 30개 정도 있습니다.',
     timeAgo: '1일 전',
     imageUrl: 'https://picsum.photos/seed/recycle13/400/400',
@@ -238,6 +248,9 @@ export const requests: Request[] = [
     userName: '오지훈',
     userImage: 'https://picsum.photos/seed/user11/100/100',
     authorId: 'user11',
+    collectorId: 'me',
+    collectorName: '김철수',
+    collectorImage: 'https://picsum.photos/seed/me/200/200',
   },
 ];
 
@@ -437,6 +450,20 @@ export const chatRooms: ChatRoom[] = [
     unreadCount: 1,
     isActive: true,
   },
+  {
+    id: 'c4',
+    requestId: '13',
+    requestDescription: '이사 준비 중이에요. 종이박스 30개 정도 있습니다.',
+    requestImageUrl: 'https://picsum.photos/seed/recycle13/400/400',
+    otherUser: {
+      name: '오지훈',
+      image: 'https://picsum.photos/seed/user11/100/100',
+    },
+    lastMessage: '네, 오늘 오후에 방문하겠습니다!',
+    lastMessageTime: '10분 전',
+    unreadCount: 0,
+    isActive: true,
+  },
 ];
 
 export const chatMessages: Record<string, ChatMessage[]> = {
@@ -526,4 +553,166 @@ export const chatMessages: Record<string, ChatMessage[]> = {
       isRead: false,
     },
   ],
+  c4: [
+    {
+      id: 'm11',
+      chatRoomId: 'c4',
+      senderId: 'other',
+      message: '제안 수락했습니다! 감사합니다.',
+      timestamp: '오전 10:00',
+      isRead: true,
+    },
+    {
+      id: 'm12',
+      chatRoomId: 'c4',
+      senderId: 'me',
+      message: '감사합니다. 오늘 오후에 방문 가능할까요?',
+      timestamp: '오전 10:05',
+      isRead: true,
+    },
+    {
+      id: 'm13',
+      chatRoomId: 'c4',
+      senderId: 'other',
+      message: '네 좋습니다. 2시 이후로 편하신 시간에 오세요!',
+      timestamp: '오전 10:10',
+      isRead: true,
+    },
+    {
+      id: 'm14',
+      chatRoomId: 'c4',
+      senderId: 'me',
+      message: '네, 오늘 오후에 방문하겠습니다!',
+      timestamp: '오전 10:12',
+      isRead: true,
+    },
+  ],
 };
+
+// 결제 관련 인터페이스 및 데이터
+export interface SavedCard {
+  id: string;
+  cardNumber: string; // 마스킹된 카드번호
+  cardName: string;
+  isPrimary: boolean;
+}
+
+export interface Payment {
+  id: string;
+  requestId: string;
+  requestDescription: string;
+  requestImageUrl: string;
+  collectorName: string;
+  amount: number;
+  status: 'pending' | 'completed' | 'refunded';
+  date: string;
+  paymentMethod: string;
+}
+
+export interface Earning {
+  id: string;
+  requestId: string;
+  requestDescription: string;
+  requestImageUrl: string;
+  requesterName: string;
+  amount: number;
+  status: 'pending' | 'available' | 'withdrawn';
+  date: string;
+  withdrawnDate?: string;
+}
+
+export const savedCards: SavedCard[] = [
+  {
+    id: '1',
+    cardNumber: '1234-****-****-5678',
+    cardName: '신한카드',
+    isPrimary: true,
+  },
+  {
+    id: '2',
+    cardNumber: '9876-****-****-4321',
+    cardName: '국민카드',
+    isPrimary: false,
+  },
+];
+
+export const payments: Payment[] = [
+  {
+    id: '1',
+    requestId: '2',
+    requestDescription: '이사 후 박스 정리 필요해요. 큰 박스 10개, 작은 박스 20개 정도입니다.',
+    requestImageUrl: 'https://picsum.photos/seed/recycle2/400/400',
+    collectorName: '한지우',
+    amount: 25000,
+    status: 'completed',
+    date: '2025.12.05',
+    paymentMethod: '신한카드 ****5678',
+  },
+  {
+    id: '2',
+    requestId: '1',
+    requestDescription: '플라스틱 페트병, 용기류 많아요. 깨끗하게 씻어서 분리해뒀어요.',
+    requestImageUrl: 'https://picsum.photos/seed/recycle1/400/400',
+    collectorName: '서준혁',
+    amount: 15000,
+    status: 'pending',
+    date: '2025.12.06',
+    paymentMethod: '신한카드 ****5678',
+  },
+  {
+    id: '3',
+    requestId: '3',
+    requestDescription: '캔, 유리병 위주로 있어요. 맥주캔이 많습니다.',
+    requestImageUrl: 'https://picsum.photos/seed/recycle3/400/400',
+    collectorName: '윤서아',
+    amount: 20000,
+    status: 'completed',
+    date: '2025.12.01',
+    paymentMethod: '국민카드 ****4321',
+  },
+];
+
+export const earnings: Earning[] = [
+  {
+    id: '1',
+    requestId: '13',
+    requestDescription: '이사 준비 중이에요. 종이박스 30개 정도 있습니다.',
+    requestImageUrl: 'https://picsum.photos/seed/recycle13/400/400',
+    requesterName: '오지훈',
+    amount: 28000,
+    status: 'available',
+    date: '2025.12.05',
+  },
+  {
+    id: '2',
+    requestId: '12',
+    requestDescription: '플라스틱 용기, 페트병 등 있어요. 깨끗하게 씻어놨습니다.',
+    requestImageUrl: 'https://picsum.photos/seed/recycle12/400/400',
+    requesterName: '송하늘',
+    amount: 14000,
+    status: 'pending',
+    date: '2025.12.06',
+  },
+  {
+    id: '3',
+    requestId: '7',
+    requestDescription: '종이류만 있어요. 신문, 잡지, 종이박스 등',
+    requestImageUrl: 'https://picsum.photos/seed/recycle7/400/400',
+    requesterName: '이하은',
+    amount: 16000,
+    status: 'withdrawn',
+    date: '2025.11.28',
+    withdrawnDate: '2025.12.01',
+  },
+  {
+    id: '4',
+    requestId: '5',
+    requestDescription: '플라스틱, 캔 위주입니다. 이미 분리해뒀어요!',
+    requestImageUrl: 'https://picsum.photos/seed/recycle5/400/400',
+    requesterName: '윤서아',
+    amount: 18000,
+    status: 'withdrawn',
+    date: '2025.11.20',
+    withdrawnDate: '2025.11.25',
+  },
+];

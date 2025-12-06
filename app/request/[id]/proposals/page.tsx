@@ -64,7 +64,7 @@ export default function ProposalsPage() {
     if (selectedProposal) {
       setAcceptedProposalId(selectedProposal.id);
       setIsPaymentModalOpen(false);
-      showToast(`${selectedProposal.userName}님의 제안이 수락되었어요! 결제가 완료되었습니다.`);
+      showToast(`${selectedProposal.userName}님의 제안을 수락했어요!\n결제가 완료되었습니다.`);
     }
   };
 

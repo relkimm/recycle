@@ -14,6 +14,10 @@
   --color-border: #e5e8eb;
   --color-border-light: #f2f4f6;
 
+  --color-primary: #191f28;
+  --color-error: #f04452;
+  --color-link: #3182F6;
+
   /* Spacing */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
@@ -47,6 +51,10 @@
   --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
   --shadow-xl: 0 8px 24px rgba(0, 0, 0, 0.16);
+
+  /* Layout */
+  --header-height: 53px;
+  --bottom-nav-height: 56px;
 }
 
 body {
@@ -77,6 +85,22 @@ body {
   transform: scale(1);
   display: flex;
   flex-direction: column;
+}
+
+/* Animations */
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out;
 }
 
 /* Scrollbar */
