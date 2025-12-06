@@ -1,65 +1,49 @@
-import Image from "next/image";
+import Header from '@/components/Header';
+import FilterBar from '@/components/FilterBar';
+import RequestCard from '@/components/RequestCard';
+import BottomNav from '@/components/BottomNav';
+import { requests } from '@/lib/data';
+import Link from 'next/link';
+import { Package } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="bg-white min-h-screen pb-[72px]">
+      <Header />
+      <FilterBar />
+
+      {/* Request List */}
+      <div className="px-5">
+        {requests.length > 0 ? (
+          <div className="divide-y divide-[#f2f4f6]">
+            {requests.map((req) => (
+              <Link key={req.id} href={`/request/${req.id}`}>
+                <RequestCard request={req} />
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-24 text-center">
+            <div className="w-20 h-20 bg-[#f7f8fa] rounded-full flex items-center justify-center mb-5">
+              <Package className="w-10 h-10 text-[#b0b8c1]" strokeWidth={1.5} />
+            </div>
+            <h3 className="text-[16px] font-semibold text-[#191f28] mb-2">
+              아직 동네에 요청이 없어요
+            </h3>
+            <p className="text-[14px] text-[#8b95a1] mb-6">
+              첫 번째 분리수거 요청을 등록해보세요
+            </p>
+            <Link
+              href="/request/new"
+              className="bg-[#191f28] text-white px-5 py-3 rounded-[10px] text-[15px] font-semibold pressable"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+              요청 등록하기
+            </Link>
+          </div>
+        )}
+      </div>
+
+      <BottomNav />
     </div>
   );
 }

@@ -1,26 +1,156 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Colors */
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f7f8fa;
+  --color-bg-tertiary: #f0f1f3;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-text-primary: #191f28;
+  --color-text-secondary: #4e5968;
+  --color-text-tertiary: #8b95a1;
+  --color-text-disabled: #b0b8c1;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-border: #e5e8eb;
+  --color-border-light: #f2f4f6;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 24px;
+  --spacing-3xl: 32px;
+
+  /* Typography */
+  --font-size-xs: 11px;
+  --font-size-sm: 13px;
+  --font-size-base: 15px;
+  --font-size-lg: 17px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+
+  --line-height-tight: 1.3;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.6;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 8px 24px rgba(0, 0, 0, 0.16);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard",
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+/* Mobile Frame */
+#mobile-frame {
+  width: 100%;
+  max-width: 480px;
+  background: var(--color-bg);
+  min-height: 100vh;
+  position: relative;
+  box-shadow: var(--shadow-xl);
+  overflow-x: hidden;
+  transform: scale(1);
+}
+
+/* Scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Divider */
+.divider {
+  height: 8px;
+  background: var(--color-bg-secondary);
+}
+
+/* Active States */
+.pressable {
+  transition: transform 0.1s ease, opacity 0.1s ease;
+}
+.pressable:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+/* Focus States */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+/* Transitions */
+.transition-default {
+  transition: all 0.2s ease;
+}
+
+/* Animations */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up-sheet {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.25s ease-out forwards;
+}
+
+.animate-slide-up-sheet {
+  animation: slide-up-sheet 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out forwards;
 }
