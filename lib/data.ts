@@ -294,7 +294,7 @@ export const users = [
   { name: '정민준', location: '신사동', completedDeals: 15, rating: 4.7 },
 ];
 
-export type NotificationType = 'proposal' | 'proposal_accepted' | 'proposal_rejected' | 'chat' | 'review' | 'system';
+export type NotificationType = 'proposal' | 'proposal_accepted' | 'proposal_rejected' | 'chat' | 'system';
 
 export interface Notification {
   id: string;
@@ -367,18 +367,6 @@ export const notifications: Notification[] = [
     relatedImage: 'https://picsum.photos/seed/recycle5/400/400',
     userName: '이하은',
     userImage: 'https://picsum.photos/seed/user5/100/100',
-  },
-  {
-    id: 'n6',
-    type: 'review',
-    title: '거래 후기를 남겨주세요',
-    message: '박시우님과의 거래는 어떠셨나요? 후기를 남겨주세요',
-    timestamp: '어제',
-    isRead: true,
-    relatedId: '6',
-    relatedImage: 'https://picsum.photos/seed/recycle6/400/400',
-    userName: '박시우',
-    userImage: 'https://picsum.photos/seed/user6/100/100',
   },
 ];
 

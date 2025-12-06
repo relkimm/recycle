@@ -37,22 +37,30 @@
 
 ## Design System & UI Guidelines
 
-- **Mobile First**: Designed strictly for mobile view (max-width: 390px).
-- **Frame**: Wrapped in a simulated iPhone 14 frame with Notch and Home Indicator in `layout.tsx`.
-- **Colors**:
-  - Primary: Green (`#16A34A`, `text-green-500`, `bg-green-500`)
-  - Secondary: Sky Blue (`#0EA5E9`)
-  - Accent: Orange (`#F59E0B`)
-  - Background: Gray 50/100 (`#F9FAFB`, `#F3F4F6`)
-- **Typography**: Inter font.
-  - Hero: 28px Bold
-  - Title: 20px Bold
-  - Subtitle: 18px Semibold
-  - Body: 16px Regular
+- **Mobile First**: Designed strictly for mobile view (max-width: 560px).
+- **Frame**: Wrapped in a simulated mobile frame in `layout.tsx`.
+- **Colors**: Use CSS variables defined in `globals.css`
+  - Text: `var(--color-text-primary)` (#191f28), `var(--color-text-secondary)` (#4e5968), `var(--color-text-tertiary)` (#8b95a1)
+  - Background: `var(--color-bg)` (#ffffff), `var(--color-bg-secondary)` (#f7f8fa), `var(--color-bg-tertiary)` (#f0f1f3)
+  - Border: `var(--color-border)` (#e5e8eb), `var(--color-border-light)` (#f2f4f6)
+  - Accent: `var(--color-primary)` (#191f28), `var(--color-error)` (#f04452), `var(--color-link)` (#3182F6)
+- **Typography**: Apple system font stack (-apple-system, Pretendard)
+  - XS: 11px (var(--font-size-xs))
+  - SM: 13px (var(--font-size-sm))
+  - Base: 15px (var(--font-size-base))
+  - LG: 17px (var(--font-size-lg))
+  - XL: 20px (var(--font-size-xl))
+  - 2XL: 24px (var(--font-size-2xl))
+- **Spacing**: Use CSS variables (var(--spacing-sm) to var(--spacing-3xl))
+- **Border Radius**: Use CSS variables
+  - SM: 6px (var(--radius-sm))
+  - MD: 10px (var(--radius-md))
+  - LG: 14px (var(--radius-lg))
+  - XL: 18px (var(--radius-xl))
 - **Components**:
-  - Buttons: `rounded-xl`
-  - Cards: `rounded-2xl`, `shadow-sm`
-  - Inputs: `rounded-xl`
+  - Buttons: `rounded-[10px]` (var(--radius-md))
+  - Cards: `rounded-[12px]` to `rounded-[16px]`
+  - Inputs: `rounded-[10px]` to `rounded-[12px]`
 
 ## Code Style Guidelines
 

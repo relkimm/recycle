@@ -24,9 +24,6 @@ export default function NotificationsPage() {
       router.push(`/request/${notification.relatedId}`);
     } else if (notification.type === 'chat') {
       router.push(`/chat/${notification.relatedId}`);
-    } else if (notification.type === 'review') {
-      // 후기 작성 페이지 (미구현)
-      router.push(`/request/${notification.relatedId}`);
     }
   };
 
