@@ -101,7 +101,7 @@ export default function RequestLocationPage() {
       </div>
 
       {/* Submit Button */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-white z-[60]">
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[560px] bg-white z-[60]">
         <div className="absolute inset-x-0 -top-3 h-3 bg-gradient-to-t from-black/[0.04] to-transparent pointer-events-none" />
         <div className="absolute top-0 inset-x-0 h-px bg-[#e5e8eb]" />
 

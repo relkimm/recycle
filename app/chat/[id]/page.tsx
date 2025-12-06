@@ -29,9 +29,9 @@ export default function ChatRoomPage({ params }: { params: { id: string } }) {
   };
 
   return (
-    <div className="bg-white min-h-screen flex flex-col">
+    <>
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white">
+      <header className="flex-shrink-0 z-50 bg-white">
         <div className="px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3 flex-1">
             <Link
@@ -114,7 +114,7 @@ export default function ChatRoomPage({ params }: { params: { id: string } }) {
       </div>
 
       {/* Input */}
-      <div className="sticky bottom-0 bg-white border-t border-[#f2f4f6] px-5 py-3">
+      <div className="flex-shrink-0 bg-white border-t border-[#f2f4f6] px-5 py-3">
         <div className="flex items-center gap-2">
           <button className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-[#f7f8fa] flex-shrink-0">
             <ImageIcon className="w-5 h-5 text-[#8b95a1]" strokeWidth={2} />
@@ -142,6 +142,6 @@ export default function ChatRoomPage({ params }: { params: { id: string } }) {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }

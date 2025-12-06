@@ -17,7 +17,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <div id="mobile-frame">
-            <main className="min-h-screen">{children}</main>
+            {children}
           </div>
         </Providers>
       </body>

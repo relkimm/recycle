@@ -7,7 +7,7 @@ import { chatRooms } from '@/lib/data';
 
 export default function ChatPage() {
   return (
-    <div className="bg-white min-h-screen pb-[100px]">
+    <div className="flex-1 bg-white overflow-y-auto">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white">
         <div className="px-5 py-4">

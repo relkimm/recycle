@@ -85,9 +85,10 @@ export default function NewRequestPage() {
   };
 
   return (
-    <div className="bg-white min-h-screen pb-[88px]">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white">
+    <>
+      <div className="flex-1 bg-white overflow-y-auto">
+        {/* Header */}
+        <header className="sticky top-0 z-50 bg-white">
         <div className="px-4 py-3 flex items-center justify-between">
           <Link href="/" className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#f7f8fa]">
             <X className="w-5 h-5 text-[#191f28]" strokeWidth={2} />
@@ -263,9 +264,10 @@ export default function NewRequestPage() {
           />
         </section>
       </div>
+      </div>
 
       {/* Submit Button */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-white z-[60]">
+      <div className="flex-shrink-0 w-full bg-white z-[60]">
         <div className="absolute inset-x-0 -top-3 h-3 bg-gradient-to-t from-black/[0.04] to-transparent pointer-events-none" />
         <div className="absolute top-0 inset-x-0 h-px bg-[#e5e8eb]" />
 
@@ -280,6 +282,6 @@ export default function NewRequestPage() {
 
         <div className="h-[env(safe-area-inset-bottom,0px)]" />
       </div>
-    </div>
+    </>
   );
 }

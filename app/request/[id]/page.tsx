@@ -46,9 +46,10 @@ export default function RequestDetailPage() {
   };
 
   return (
-    <div className="bg-white min-h-screen pb-[88px]">
-      {/* Floating Header */}
-      <header className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-50 px-4 py-3 flex items-center justify-between">
+    <>
+      <div className="flex-1 bg-white overflow-y-auto">
+        {/* Floating Header */}
+        <header className="absolute top-0 left-0 right-0 z-50 px-4 py-3 flex items-center justify-between">
         <Link
           href="/"
           className="w-10 h-10 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-[0_2px_8px_rgba(0,0,0,0.12)]"
@@ -63,25 +64,29 @@ export default function RequestDetailPage() {
       </header>
 
       {/* Image Gallery Carousel */}
-      <div className="relative h-[340px] bg-[#f7f8fa] overflow-hidden">
+      <div className="relative h-[340px] bg-[#f7f8fa]">
         <div
-          className="flex h-full overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+          className="flex h-full overflow-x-scroll snap-x snap-mandatory scrollbar-hide"
           onScroll={handleScroll}
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {images.map((imageUrl, index) => (
-            <div key={index} className="relative w-full h-full flex-shrink-0 snap-center">
+            <div
+              key={index}
+              className="relative flex-shrink-0 snap-center"
+              style={{ minWidth: '100%', width: '100%' }}
+            >
               <Image
                 src={imageUrl}
                 alt={`Request Image ${index + 1}`}
                 fill
                 className="object-cover"
+                priority={index === 0}
               />
             </div>
           ))}
         </div>
         {totalImages > 1 && (
-          <div className="absolute bottom-4 right-4 bg-black/60 text-white text-[12px] px-2.5 py-1 rounded-full font-medium">
+          <div className="absolute bottom-4 right-4 bg-black/60 text-white text-[12px] px-2.5 py-1 rounded-full font-medium z-10">
             {currentImageIndex + 1}/{totalImages}
           </div>
         )}
@@ -177,9 +182,10 @@ export default function RequestDetailPage() {
           </>
         )}
       </div>
+      </div>
 
       {/* Bottom Action */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-white z-[60]">
+      <div className="flex-shrink-0 w-full bg-white z-[60]">
         <div className="absolute inset-x-0 -top-3 h-3 bg-gradient-to-t from-black/[0.04] to-transparent pointer-events-none" />
         <div className="absolute top-0 inset-x-0 h-px bg-[#e5e8eb]" />
 
@@ -240,6 +246,6 @@ export default function RequestDetailPage() {
           }}
         />
       )}
-    </div>
+    </>
   );
 }

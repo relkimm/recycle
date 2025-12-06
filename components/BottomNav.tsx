@@ -14,7 +14,7 @@ export default function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-white z-50">
+    <nav className="flex-shrink-0 w-full bg-white z-50 border-t border-[#f2f4f6]">
       {/* Shadow */}
       <div className="absolute inset-x-0 -top-3 h-3 bg-gradient-to-t from-black/[0.04] to-transparent pointer-events-none" />
 

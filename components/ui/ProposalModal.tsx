@@ -56,7 +56,7 @@ export default function ProposalModal({ isOpen, onClose, onSubmit, request }: Pr
       />
 
       {/* Modal */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-white rounded-t-[20px] z-[80] animate-slide-up-sheet">
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[560px] bg-white rounded-t-[20px] z-[80] animate-slide-up-sheet">
         {/* Handle */}
         <div className="flex justify-center pt-3 pb-2">
           <div className="w-10 h-1 bg-[#e5e8eb] rounded-full" />

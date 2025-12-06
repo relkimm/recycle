@@ -28,9 +28,10 @@ export default function MyPage() {
   };
 
   return (
-    <div className="bg-white min-h-screen pb-[72px]">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white">
+    <>
+      <div className="flex-1 bg-white overflow-y-auto">
+        {/* Header */}
+        <header className="sticky top-0 z-50 bg-white">
         <div className="px-5 py-3 flex items-center justify-between">
           <h1 className="text-[18px] font-bold text-[#191f28]">마이</h1>
           <Link href="/my/settings" className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#f7f8fa]">
@@ -191,8 +192,9 @@ export default function MyPage() {
           </div>
         )}
       </div>
+      </div>
 
       <BottomNav />
-    </div>
+    </>
   );
 }

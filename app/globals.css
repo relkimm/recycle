@@ -68,13 +68,15 @@ body {
 /* Mobile Frame */
 #mobile-frame {
   width: 100%;
-  max-width: 480px;
+  max-width: 560px;
   background: var(--color-bg);
-  min-height: 100vh;
+  height: 100vh;
   position: relative;
   box-shadow: var(--shadow-xl);
-  overflow-x: hidden;
+  overflow: hidden;
   transform: scale(1);
+  display: flex;
+  flex-direction: column;
 }
 
 /* Scrollbar */
@@ -82,6 +84,14 @@ body {
   display: none;
 }
 .no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }

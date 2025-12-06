@@ -60,7 +60,7 @@ export default function ProposalsPage() {
   };
 
   return (
-    <div className="bg-white min-h-screen pb-[88px]">
+    <div className="flex-1 bg-white overflow-y-auto">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white">
         <div className="px-4 py-3 flex items-center gap-4">
